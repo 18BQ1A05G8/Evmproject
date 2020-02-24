@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 import tkinter.ttk as ttk
+import string
 class project:
     def helpfun(self):
         root = Tk()
@@ -42,12 +43,28 @@ class project:
         c=0
         global d
         d=0
-        #delete data from data.txt
+        #delete data from data.txt and data2.txt
         f = open('data.txt','r+')
         f.truncate(0)
         f = open('data2.txt','r+')
         f.truncate(0) 
         return
+    def cheak(self,i1,i2):
+        file1 = open("data.txt", "r")
+        if (" "+i1+"-"+i2+" \n") in file1.read():
+            return 1
+        else :
+            return 0 
+        file1.close()
+        
+    def cheak2(self,i1,i2):
+        file1 = open("data2.txt", "r")
+        if (" "+i1+"-"+i2+" \n") in file1.read():
+            return 1
+        else :
+            return 0
+        file1.close()
+    
     def reg_window(self):
         top=Tk()
         top.geometry("1920x1080")
@@ -56,9 +73,9 @@ class project:
         labelfont = ('times', 20, 'bold')
         self.Entry3 = Entry(top)
         self.Entry3.place(relx=0.383, rely=0.267,height=36, relwidth=0.34)
-        self.Entry4 =Entry(top)
+        self.Entry4 =Entry(top,show="*")
         self.Entry4.place(relx=0.383, rely=0.4,height=36, relwidth=0.34)
-        self.Entry5 =Entry(top)
+        self.Entry5 =Entry(top,show="*")
         self.Entry5.place(relx=0.383, rely=0.533,height=36, relwidth=0.34)
         self.Label1 =Label(top,text="New ID :",bg="#E1F5A9",font=labelfont)
         self.Label1.place(relx=0.25, rely=0.272, height=26, width=122)
@@ -74,21 +91,26 @@ class project:
         i3=self.Entry3.get()
         i4=self.Entry4.get()
         i5=self.Entry5.get()
-        if i3=="":
-            messagebox.showinfo("NOTICE","Please Enter Valid User Name")
-            return
-        file1 = open("data.txt", "r")
-        if ((" "+i3+"-") not in file1.read()) and i3!="5g8":
-            if(i4==i5):
-                file1 = open("data.txt", "a")
-                file1.write(" "+i3+"-"+i4+" \n")
-                file1.close()
-                messagebox.showinfo("NOTICE","REGISTRATION SUCCESS") 
-            else :
-                messagebox.showerror("WARNING","PASSWORD DIDN'T MATCH")
+        invalid=(r"""!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~""")
+        if (i3 not in string.whitespace) and (i4 not in string.whitespace) and (i5 not in string.whitespace) and i3 not in invalid:
+            
+            file1 = open("data.txt", "r")
+            if ((" "+i3+"-") not in file1.read()) and i3!="5g8":
+                
+                if(i4==i5):
+                    file1 = open("data.txt", "a")
+                    file1.write(" "+i3+"-"+i4+" \n")
+                    file1.close()
+                    messagebox.showinfo("NOTICE","REGISTRATION SUCCESS") 
+                else :
+                    messagebox.showerror("WARNING","PASSWORD DIDN'T MATCH")
+            else:
+                messagebox.showwarning("NOTICE","User Name Already Exists")
+            file1.close()
         else:
-            messagebox.showwarning("NOTICE","User Name Already Exists")
-        file1.close()
+            messagebox.showinfo("NOTICE","Please Enter Valid User Name")
+        return
+            
     def LOGIN_WINDOW(self):
         master=Tk()
         master.geometry("1920x1080")
@@ -110,21 +132,8 @@ class project:
         self.button3.place(relx=0.550, rely=0.500, height=48, width=138)
         self.button2=Button(master,text="HELP",bg="#E1F5A9",command=self.helpfun)
         self.button2.place(relx=0.833, rely=0.044, height=33, width=56)
-        #voting part
-    def cheak(self,i1,i2):
-        file1 = open("data.txt", "r")
-        if (" "+i1+"-"+i2+" \n") in file1.read():
-            return 1
-        else :
-            return 0 
-        file1.close()
-    def cheak2(self,i1,i2):
-        file1 = open("data2.txt", "r")
-        if (" "+i1+"-"+i2+" \n") in file1.read():
-            return 1
-        else :
-            return 0
-        file1.close()
+        
+        
     def storedata(self):
         i1=self.entry1.get()
         i2=self.entry2.get()
@@ -144,21 +153,21 @@ class project:
                     self.TSeparator0.place(relx=0.0, rely=0.145, relwidth=0.983)
                     self.TSeparator1 = ttk.Separator(top)
                     self.TSeparator1.place(relx=0.0, rely=0.15, relwidth=0.983)
-                    lab1=Label(top, text='PARTY1',bg="yellow",fg="green",font=10,width=50,height=3)
+                    lab1=Label(top, text='PARTY1',bg="yellow",fg="green",font=10,width=50,height=5)
                     lab1.place(relx=0.255, rely=0.209, height=43, width=300)
-                    button1=Button(top, text='vote',bg="#E1F5A9",font=10,width=7,height=2, command=self.click1)
+                    button1=Button(top, text='vote',bg="#E1F5A9",font=10,width=7,height=4, command=self.click1)
                     button1.place(relx=0.573, rely=0.209, height=43, width=76)
-                    lab2=Label(top,text="PARTY2",bg="blue",font=10,fg="white",width=50,height=3)
+                    lab2=Label(top,text="PARTY2",bg="blue",font=10,fg="white",width=50,height=5)
                     lab2.place(relx=0.255, rely=0.333, height=43, width=300)
                     button2=Button(top,text="vote",bg="#E1F5A9",font=10,width=7,height=2,command=self.click2)
                     button2.place(relx=0.573, rely=0.333, height=43, width=76)
-                    lab3=Label(top,text="PARTY3",bg="red",font=10,fg="white",width=50,height=3)
+                    lab3=Label(top,text="PARTY3",bg="red",font=10,fg="white",width=50,height=5)
                     lab3.place(relx=0.255, rely=0.467, height=43, width=300)
-                    button3=Button(top,text="vote",bg="#E1F5A9",font=10,width=7,height=2,command=self.click3)
+                    button3=Button(top,text="vote",bg="#E1F5A9",font=10,width=7,height=4,command=self.click3)
                     button3.place(relx=0.573, rely=0.467, height=43, width=76)
-                    lab4=Label(top,text="Independent",bg="green",font=10,fg="white",width=50,height=3)
+                    lab4=Label(top,text="Independent",bg="green",font=10,fg="white",width=50,height=5)
                     lab4.place(relx=0.255, rely=0.6, height=43, width=300)
-                    button4=Button(top,text="vote",bg="#E1F5A9",font=10,width=7,height=2,command=self.click4)
+                    button4=Button(top,text="vote",bg="#E1F5A9",font=10,width=7,height=4,command=self.click4)
                     button4.place(relx=0.573, rely=0.6, height=43, width=76)
                 else:
                     messagebox.showwarning("WARNING","you can't vote again !!!! ")
@@ -175,6 +184,7 @@ class project:
             button5.place(relx=0.214, rely=0.267, height=63, width=96)
             ButtonReset = Button(top, text="Reset",bg="#E1F5A9",width=6,height=2, command=self.reset)
             ButtonReset.place(relx=0.567, rely=0.267, height=63, width=96)
+            
     def results(self):
         global a,b,c,d
         global s
@@ -185,33 +195,33 @@ class project:
                 percent=str(round((a/s)*100,2))
                 s1=str(s)
                 messagebox.showinfo("RESULT","PARTY1 wins with "+percent +"% in "+s1+" votes")
-                f = open('data.txt','r+')
+                f = open('data2.txt','r+')
                 f.truncate(0)
                 return
             if m==b and not(b==c or b==d or b==a):
                 percent=str(round((b/s)*100,2))
                 s1=str(s)
                 messagebox.showinfo("RESULT","PARTY2 wins with "+percent +"% in "+s1+" votes")
-                f = open('data.txt','r+')
+                f = open('data2.txt','r+')
                 f.truncate(0)
                 return
             if m==c and not(a==c or b==c or c==d):
                 percent=str(round((c/s)*100,2))
                 s1=str(s)
                 messagebox.showinfo("RESULT","PARTY3 wins with "+percent +"% in "+s1+" votes")
-                f = open('data.txt','r+')
+                f = open('data2.txt','r+')
                 f.truncate(0)
                 return
             if m==d and not(a==d or b==d or c==d):
                 percent=str(round((d/s)*100,2))
                 s1=str(s)
                 messagebox.showinfo("RESULT","Independent wins with "+percent +"% in "+s1+" votes")
-                f = open('data.txt','r+')
+                f = open('data2.txt','r+')
                 f.truncate(0)
                 return
             if a==b or a==c or a==d or b==c or b==d or c==d:
                 messagebox.showinfo("RESULT","Please Perfom Manual Power Comparision")
-                f = open('data.txt','r+')
+                f = open('data2.txt','r+')
                 f.truncate(0)
                 return
         else:
