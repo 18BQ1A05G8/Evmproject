@@ -11,6 +11,8 @@ class project:
         var = "GOOGLE IT "
         label = Label( root,bg="#E1F5A9", text=var)
         label.pack()
+        button=Button(root,text="thanks", bg ="#E1F5A9",command=root.destroy)
+        button.pack(side="bottom")
 
     def click1(self):
         global a
