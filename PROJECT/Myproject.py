@@ -66,7 +66,7 @@ class project:
         else :
             return 0
         file1.close()
- 
+    
     def REG_WINDOW(self):
         top=Tk()
         top.geometry("1920x1080")
