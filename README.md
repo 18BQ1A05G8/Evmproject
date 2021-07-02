@@ -1,5 +1,5 @@
 # EVM_project
 Here are some screenshots of my project. Its a simple code for implementing EVM by using python
-![Screenshot (15)](https://user-images.githubusercontent.com/46423269/124286327-7329c400-db6c-11eb-8eac-ccb664466c3a.png)
-![Screenshot (16)](https://user-images.githubusercontent.com/46423269/124286359-7b81ff00-db6c-11eb-96bc-8fbe9c5e3f95.png)
-![Screenshot (17)](https://user-images.githubusercontent.com/46423269/124286375-7fae1c80-db6c-11eb-83fe-71a691b914d4.png)
+![login](https://user-images.githubusercontent.com/46423269/124286961-1c70ba00-db6d-11eb-9307-936ae473e5aa.png)
+![register](https://user-images.githubusercontent.com/46423269/124286966-1e3a7d80-db6d-11eb-893b-6a1833bcca97.png)
+![vote](https://user-images.githubusercontent.com/46423269/124286972-20044100-db6d-11eb-95ea-1135ed96d716.png)
